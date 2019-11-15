@@ -1,0 +1,30 @@
+// The base Sass framework/toolset. This doesn't actually output and CSS, which
+// is essential because it gets attached to every piece of Sass in the system.
+
+// Functions first.
+@import "~bootstrap/scss/functions";
+@import "~scss/framework/functions";
+
+// Custom pre-import variables.
+@import "~scss/framework/svgs";
+@import "~scss/framework/vars-custom-pre";
+
+// Bootstrap variables.
+@import "~scss/framework/vars-bootstrap";
+@import "~bootstrap/scss/variables";
+
+// Bootstrap-Vue variables.
+@import "~scss/framework/vars-bootstrap-vue";
+@import "~bootstrap-vue/src/variables";
+
+// Custom post-import variables.
+@import "~scss/framework/vars-custom-post";
+
+// Bootstrap mixins.
+@import "~bootstrap/scss/mixins";
+
+// Custom mixins.
+@import "~scss/framework/mixins";
+
+// Bootstrap-Vue utilities.
+@import "~bootstrap-vue/src/utilities";

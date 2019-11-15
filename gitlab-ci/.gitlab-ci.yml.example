@@ -1,0 +1,111 @@
+variables:
+  PROJECT_NAME: "wiznerd_d8"
+  WEB_ROOT_FOLDER_NAME: "web"
+  IMAGE_NAME: "wodby/drupal-php:7.2-dev-4.6.0"
+
+  #Staging config
+  STAGING_PATH: "/var/www/wiznerd_d8-staging.thewiznerd.com"
+  STAGING_USER: "devops"
+  STAGING_URL: "wiznerd_d8-staging.thewiznerd.com"
+  STAGING_HOST: "gandalf.thewiznerd.com"
+  #Produciton config
+  PRODUCTION_PATH: "/var/www/wiznerd_d8"
+  PRODUCTION_USER: "devops"
+  PRODUCTION_URL: "wiznerd_d8.thewiznerd.com"
+  PRODUCTION_HOST: "gandalf.thewiznerd.com"
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  tags:
+    - drupal-build
+  image: $IMAGE_NAME
+  before_script:
+    # Install composer package to run parallel tasks.
+    - composer -n global require -n "hirak/prestissimo"
+
+  script:
+    - composer install
+
+    # remove unnecessary files
+    - rm -rf .git
+  artifacts:
+    name: $PROJECT_NAME_{CI_COMMIT_SHA}
+    expire_in: '2 days'
+    paths:
+    - ./
+  only:
+    - staging
+    #- master
+
+deploy_staging:
+  stage: deploy
+  tags:
+    - drupal-deploy
+  environment:
+    name: staging
+    url: $STAGING_URL
+  only:
+    - staging
+  image: $IMAGE_NAME
+  script:
+    - eval `ssh-agent -s`
+    - ssh-add <(echo "$STAGING_KEY")
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh -p22 $STAGING_USER@$STAGING_HOST /bin/bash <<EOF
+    - mkdir ${STAGING_PATH}_tmp
+    - EOF
+    - scp -r ./* $STAGING_USER@$STAGING_HOST:${STAGING_PATH}_tmp
+    - ssh $STAGING_USER@$STAGING_HOST /bin/bash <<EOF
+    - cp $STAGING_PATH/$WEB_ROOT_FOLDER_NAME/sites/default/settings.php ${STAGING_PATH}_tmp/$WEB_ROOT_FOLDER_NAME/sites/default/settings.php
+    - rsync -a --ignore-existing $STAGING_PATH/private/ ${STAGING_PATH}_tmp/private
+    - rsync -a --ignore-existing $STAGING_PATH/$WEB_ROOT_FOLDER_NAME/sites/default/files/ ${STAGING_PATH}_tmp/$WEB_ROOT_FOLDER_NAME/sites/default/files
+    - cd ${STAGING_PATH}_tmp/gitlab-ci
+    - chmod +x set-permissions.sh
+    - ./set-permissions.sh ${STAGING_PATH}_tmp
+    - mv $STAGING_PATH ${STAGING_PATH}_old
+    - mv ${STAGING_PATH}_tmp $STAGING_PATH
+    - rm -rf ${STAGING_PATH}_old
+    - cd $STAGING_PATH
+    - drush cr
+    - drush updb -y
+    - drush cim -y
+    - EOF
+
+deploy_production:
+  stage: deploy
+  tags:
+    - drupal-deploy
+  environment:
+    name: production
+    url: $PRODUCTION_URL
+  only:
+    - never
+    #- master
+  image: $IMAGE_NAME
+  script:
+    - eval `ssh-agent -s`
+    - ssh-add <(echo "$PRODUCTION_KEY")
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh -p22 $PRODUCTION_USER@$PRODUCTION_HOST /bin/bash <<EOF
+    - mkdir ${PRODUCTION_PATH}_tmp
+    - EOF
+    - scp -r ./* $PRODUCTION_USER@$PRODUCTION_HOST:${PRODUCTION_PATH}_tmp
+    - ssh $PRODUCTION_USER@$PRODUCTION_HOST /bin/bash <<EOF
+    - cp $PRODUCTION_PATH/$WEB_ROOT_FOLDER_NAME/sites/default/settings.php ${PRODUCTION_PATH}_tmp/$WEB_ROOT_FOLDER_NAME/sites/default/settings.php
+    - rsync -a --ignore-existing $PRODUCTION_PATH/private/ ${PRODUCTION_PATH}_tmp/private
+    - rsync -a --ignore-existing $PRODUCTION_PATH/$WEB_ROOT_FOLDER_NAME/sites/default/files/ ${PRODUCTION_PATH}_tmp/$WEB_ROOT_FOLDER_NAME/sites/default/files
+    - cd ${PRODUCTION_PATH}_tmp/gitlab-ci
+    - chmod +x set-permissions.sh
+    - ./set-permissions.sh ${PRODUCTION_PATH}_tmp
+    - mv $PRODUCTION_PATH ${PRODUCTION_PATH}_old
+    - mv ${PRODUCTION_PATH}_tmp $PRODUCTION_PATH
+    - rm -rf ${PRODUCTION_PATH}_old
+    - cd $PRODUCTION_PATH
+    - drush cr
+    - drush updb -y
+    - drush cim -y
+    - EOF

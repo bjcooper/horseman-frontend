@@ -1,0 +1,16 @@
+{
+  "name": "@bit/wiznerd.horseman.rest-vuex",
+  "version": "0.0.6",
+  "homepage": "https://bit.dev/wiznerd/horseman/rest-vuex",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "license": "SEE LICENSE IN LICENSE",
+  "bit": {
+    "env": {}
+  }
+}

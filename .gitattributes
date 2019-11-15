@@ -1,0 +1,4 @@
+*.js eol=crlf
+*.js eol=lf
+*.vue eol=crlf
+*.vue eol=lf

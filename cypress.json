@@ -1,0 +1,7 @@
+{
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "baseUrl": "http://localhost:3003",
+  "viewportWidth": 320,
+  "viewportHeight": 600,
+  "defaultCommandTimeout": 6000
+}

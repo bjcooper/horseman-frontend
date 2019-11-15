@@ -1,0 +1,62 @@
+// Put stuff in here that should only be imported once in the project.
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700|Raleway:400,700");
+
+// Import Bootstrap styles.
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+// @import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/tables";
+// @import "~bootstrap-vue/src/components/table/index";
+@import "~bootstrap/scss/forms";
+// @import "~bootstrap-vue/src/components/form-checkbox/index";
+// @import "~bootstrap-vue/src/components/form-file/index";
+// @import "~bootstrap-vue/src/components/form-input/index";
+// @import "~bootstrap-vue/src/components/form-radio/index";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap-vue/src/components/dropdown/index";
+// @import "~bootstrap/scss/button-group";
+// @import "~bootstrap/scss/input-group";
+// @import "~bootstrap-vue/src/components/input-group/index";
+@import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap-vue/src/components/nav/index";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap-vue/src/components/navbar/index";
+@import "~bootstrap/scss/card";
+@import "~bootstrap-vue/src/components/card/index";
+@import "~bootstrap/scss/breadcrumb";
+// @import "~bootstrap/scss/pagination";
+// @import "~bootstrap-vue/src/components/pagination/index";
+// @import "~bootstrap-vue/src/components/pagination-nav/index";
+// @import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/jumbotron";
+@import "~bootstrap/scss/alert";
+// @import "~bootstrap/scss/progress";
+// @import "~bootstrap/scss/media";
+// @import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap-vue/src/components/modal/index";
+// @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap-vue/src/components/tooltip/index";
+// @import "~bootstrap/scss/popover";
+// @import "~bootstrap-vue/src/components/popover/index";
+// @import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/utilities";
+// @import "~bootstrap/scss/print";
+// @import "~bootstrap-vue/src/components/toast/index";
+
+// Import our base styles.
+@import "~scss/base/layout";
+@import "~scss/base/type";
+
+// Import our util styles.
+@import "~scss/utils/animations";
+@import "~scss/utils/transitions";
+
+// Import our specific component styles here.

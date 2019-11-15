@@ -1,0 +1,59 @@
+{
+  "name": "horseman",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Client-side frontend for decoupled Horseman",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "npminstall": "npm install",
+    "test": "npx cypress run"
+  },
+  "dependencies": {
+    "@bit/wiznerd.horseman.rest-vuex": "file:./bit/rest-vuex",
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/pro-light-svg-icons": "^5.11.2",
+    "@fortawesome/pro-regular-svg-icons": "^5.11.2",
+    "@fortawesome/pro-solid-svg-icons": "^5.11.2",
+    "@fortawesome/vue-fontawesome": "^0.1.7",
+    "bootstrap-vue": "^2.0.2",
+    "moment": "^2.23.0",
+    "register-service-worker": "^1.5.2",
+    "vue": "^2.6.10",
+    "vue-analytics": "^5.17.2",
+    "vue-mq": "^1.0.1",
+    "vue-router": "^3.1.3",
+    "vue-uuid": "^1.1.1",
+    "vue2-touch-events": "^2.0.0",
+    "vuex": "^3.1.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.6.2",
+    "@cypress/webpack-preprocessor": "^4.1.0",
+    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-e2e-cypress": "^3.11.0",
+    "@vue/cli-plugin-eslint": "^3.11.0",
+    "@vue/cli-plugin-pwa": "^3.11.0",
+    "@vue/cli-service": "^3.11.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.3",
+    "bit-bin": "^14.4.3",
+    "cypress": "^3.4.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^6.0.7",
+    "vue-cli-plugin-webpack-bundle-analyzer": "^1.4.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "bit/{name}",
+    "packageManager": "npm"
+  }
+}

@@ -1,0 +1,61 @@
+/**
+ * Generally-available transition types.
+ */
+@include transition-fade();
+@include transition-fade-slide-right();
+@include transition-fade-slide-down();
+
+.entity-change {
+  &-enter-active,
+  &-leave-active {
+    transition-duration: 0.15s;
+    transition-property: height, opacity, transform;
+    transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    overflow: hidden;
+  }
+
+  &-enter-active {
+    transition-delay: 0.15s;
+  }
+
+  &-enter {
+    opacity: 0;
+    transform: translate(-2em, 0);
+  }
+
+  &-leave-to {
+    opacity: 0;
+    height: 0;
+  }
+}
+
+.list-transition {
+  &-enter-active,
+  &-leave-active,
+  &-move {
+    transition: opacity 2s ease, transform 2s ease;
+  }
+
+  &-enter {
+    opacity: 0;
+    transform: translateX(50px) scaleY(0.5);
+  }
+
+  &-enter-to {
+    opacity: 1;
+    transform: translateX(0) scaleY(1);
+  }
+
+  &-leave-active {
+    position: absolute;
+  }
+
+  &-leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: center top;
+  }
+}
+
+@include transition-fade-slide-right("page-content-transition");
+@include transition-fade-slide-down("conditional-field", 0.3s);

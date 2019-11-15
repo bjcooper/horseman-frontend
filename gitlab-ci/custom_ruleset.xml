@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="Dordt_Custom">
+
+<rule ref="Generic.PHP.ForbiddenFunctions">
+    <properties>
+        <property name="forbiddenFunctions" type="array"
+            value="dpm=>null" />
+     </properties>
+</rule>
+
+</ruleset>

@@ -1,0 +1,160 @@
+/**
+ * Increase opacity on hover.
+ */
+@mixin hover-opacity($opacity: 0.5, $transition-duration: 0.25s) {
+  opacity: $opacity;
+  transition: opacity $transition-duration;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+/**
+ * Fancy header with ----- Lines on the sides ------. 
+ */
+@mixin lines-on-sides($width: 2px) {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    border-top: #{$width} solid;
+    flex: 1 0 $spacer;
+  }
+
+  &::before {
+    margin-right: $spacer / 4;
+  }
+
+  &::after {
+    margin-left: $spacer / 4;
+  }
+}
+
+/**
+ * Fade transition.
+ */
+@mixin transition-fade($name: "fade", $duration: 0.1s) {
+  .#{$name} {
+    &-enter-active,
+    &-leave-active {
+      transition-duration: $duration;
+      transition-property: opacity;
+      transition-timing-function: ease;
+    }
+
+    &-enter,
+    &-leave-to {
+      opacity: 0;
+    }
+  }
+}
+
+/**
+ * Fade out, slide in from left.
+ */
+@mixin transition-fade-slide-right($name: "fade-slide-right", $duration: 0.15s) {
+  .#{$name} {
+    &-enter-active,
+    &-leave-active {
+      transition-duration: $duration;
+      transition-timing-function: ease;
+      overflow: hidden;
+    }
+
+    &-enter-active {
+      transform: translateX(0) translateZ(0);
+      transition-property: opacity, transform;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    &-leave-active {
+      transition-property: opacity;
+    }
+
+    &-enter {
+      opacity: 0;
+      transform: translateX(-2em) translateZ(0);
+    }
+
+    &-leave-to {
+      opacity: 0;
+    }
+  }
+}
+
+/**
+ * Fade out, slide in from top.
+ */
+@mixin transition-fade-slide-down($name: "fade-slide-down", $duration: 0.2s) {
+  .#{$name} {
+    &-enter-active,
+    &-leave-active {
+      transition-duration: $duration;
+      transition-timing-function: ease;
+      overflow: hidden;
+    }
+    
+    &-enter-active{
+      transform: translateX(0) translateZ(0);
+      transition-property: opacity, transform;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    &-leave-active {
+      transition-property: opacity;
+    }
+
+    &-enter {
+      opacity: 0;
+      transform: translateY(-2em) translateZ(0);
+    }
+
+    &-leave-to {
+      opacity: 0;
+    }
+  }
+}
+
+/**
+ * Slide out to top, slide in from top.
+ */
+@mixin transition-collapse-expand($name: "collapse-expand", $duration: 0.2s) {
+  .#{$name} {
+    &-enter-active,
+    &-leave-active {
+      transition-duration: $duration;
+      transition-timing-function: ease;
+      overflow: hidden;
+    }
+    
+    &-enter-active{
+      transform: translateX(0) translateZ(0);
+      transition-property: opacity, transform;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    &-leave-active {
+      transition-property: opacity;
+    }
+
+    &-enter {
+      opacity: 0;
+      transform: translateY(-2em) translateZ(0);
+    }
+
+    &-leave-to {
+      opacity: 0;
+    }
+  }
+}
